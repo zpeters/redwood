@@ -1,7 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 
-import execa from 'execa'
 import { outputFileSync } from 'fs-extra'
 import Listr from 'listr'
 
@@ -58,7 +57,7 @@ export const handler = async ({ force, install }) => {
   const packages = [
     'postcss',
     'postcss-loader',
-    'tailwindcss@next',
+    'tailwindcss',
     'autoprefixer',
   ]
 
