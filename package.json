@@ -60,7 +60,10 @@
     "build:link": "node ./tasks/build-and-copy",
     "build:test-project": "node ./tasks/test-project/test-project",
     "release-notes": "cd tasks/release-notes && yarn install && ./release-notes.js",
-    "publish:canary": "lerna publish --force-publish --canary --include-merged-tags --preid canary --dist-tag canary --yes --loglevel verbose"
+    "publish:canary": "lerna publish --force-publish --canary --include-merged-tags --preid canary --dist-tag canary --yes --loglevel verbose",
+    "publish:rc-patch": "lerna publish --force-publish --canary --preid rc --dist-tag rc --loglevel verbose --yes",
+    "publish:rc-minor": "lerna publish preminor --force-publish --canary --preid rc --dist-tag rc --loglevel verbose --yes",
+    "publish:rc-major": "lerna publish premajor --force-publish --canary --preid rc --dist-tag rc --loglevel verbose --yes"
   },
   "packageManager": "yarn@3.0.2"
 }
