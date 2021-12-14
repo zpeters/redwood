@@ -1,0 +1,20 @@
+
+// triggers on release branch commit, e.g. release/minor/v0.40.0
+
+use process.env
+
+// parsed info from release branch
+semver: "minor",
+version: "v0.40.0"
+
+// should I run rc?
+- use `git describe` // EX: v0.40.0-72-g9048b819
+- is `git describe` < ${version}
+
+Could we store
+
+// which script should I run
+
+yarn publish:rc-${semver}
+
+// return results to GitHub Action

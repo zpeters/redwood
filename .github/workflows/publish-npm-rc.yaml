@@ -20,6 +20,20 @@ jobs:
         with:
           node-version: '14'
 
+      - name: Save branch latest tag and name to env var
+        run: |
+          echo 'BRANCH_TAG='$(git describe)>>$GITHUB_ENV
+          echo 'BRANCH_NAME'=${{github.ref_name}}>>$GITHUB_ENV
+          echo $BRANCH_TAG
+          echo $BRANCH_NAME
+
+
+      - name: Save branch name to env var
+        run: |
+          echo "git describe
+          echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > .npmrc
+
+
       - name: Install dependencies
         run: yarn install --immutable --check-files
 
@@ -36,10 +50,19 @@ jobs:
         env:
           CI: true
 
+      - name: Should I publish
+        run: |
+          ./tasks/public-rc
+
       - name: Publish
         run: |
           git fetch --depth=1 origin +refs/tags/*:refs/tags/*
           echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > .npmrc
-          ./tasks/publish-rc
+          yarn publish:rc-${version}
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Cleanup
+        run |
+          # reset env vars
+          # or at beginning of run we check if Env Vars exist
