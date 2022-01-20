@@ -11,17 +11,18 @@ generator client {
 // migrations for them.
 
 model Post {
-  id       Int       @id @default(autoincrement())
+  id       Int          @id @default(autoincrement())
   title    String
-  slug     String    @unique
+  slug     String       @unique
   author   String
   body     String
   image    String?
-  isPinned Boolean   @default(false)
-  readTime Int
+  isPinned Boolean      @default(false)
+  readTime Decimal      @default(1.0)
   rating   Float?
   postedAt DateTime?
   metadata Json
+  upvotes  Int          @default(0)
   favorites Favorite[]
 }
 
@@ -34,10 +35,10 @@ model User {
 }
 
 model UserProfile {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  userId   Int
-  user     User   @relation(fields: [userId], references: [id])
+  id         Int     @id @default(autoincrement())
+  username   String  @unique
+  userId     Int
+  user       User    @relation(fields: [userId], references: [id])
 }
 
 model NoEditableField {
