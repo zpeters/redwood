@@ -42,7 +42,7 @@ model UserProfile {
 }
 
 model NoEditableField {
-  id Int @id @default(autoincrement())
+  id      Int     @id @default(autoincrement())
 }
 
 model Favorite {
