@@ -1,0 +1,19 @@
+name: Cypress E2E tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths: ['docs/**']
+
+jobs:
+  cypress-run:
+    if: github.repository == 'redwoodjs/redwood'
+    strategy:
+      matrix:
+        os: ['ubuntu-latest']
+        node-version: ['14', '16']
+      fail-fast: true
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} | Node ${{ matrix.node-version }} latest
+    steps:
+      - run: 'echo "No e2e required"'

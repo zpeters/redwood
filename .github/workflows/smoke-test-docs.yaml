@@ -1,0 +1,23 @@
+name: Smoke test, CLI Checks and Telemetry Benchmarks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths: ['docs/**']
+
+jobs:
+  smoke-test:
+    if: github.repository == 'redwoodjs/redwood'
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'windows-latest']
+        node-version: ['14', '16']
+      fail-fast: true
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} | Node ${{ matrix.node-version }} latest
+    env:
+      REDWOOD_CI: 1
+      REDWOOD_VERBOSE_TELEMETRY: 1
+      PLAYWRIGHT_BROWSERS_PATH: 0 # this makes sure that playwright dependencies are cached in node_modules
+    steps:
+      - run: 'echo "No smoke test required"'

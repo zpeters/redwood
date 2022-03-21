@@ -1,0 +1,18 @@
+name: Lint, Build & Test
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths: ['docs/**']
+
+jobs:
+  all:
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'windows-latest']
+        node-version: ['14', '16.10']
+      fail-fast: true
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} | Node ${{ matrix.node-version }} latest
+    steps:
+      - run: 'echo "No lint, build, & test required"'
