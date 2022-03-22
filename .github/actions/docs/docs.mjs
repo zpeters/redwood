@@ -1,11 +1,7 @@
 import * as core from '@actions/core'
 
-const changedFiles = core.getInput('changed_files', { required: true });
+const changedFiles = core.getInput('changed_files', { required: true }).split(' ')
 
-console.log({
-  changedFiles
-})
-
-const shouldSkip = true
+const shouldSkip = changedFiles.every((file) => file.startsWith('docs/'))
 
 core.setOutput('should_skip', shouldSkip)
