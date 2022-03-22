@@ -27,4 +27,10 @@ jobs:
             echo "$file was changed"
           done
 
+      - name: Docs
+        id: docs
+        uses: ./.github/actions/docs
+        with:
+          changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
+
       - run: 'echo "No lint, build, & test required"'

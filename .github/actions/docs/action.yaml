@@ -1,0 +1,12 @@
+name: 'Docs'
+description: 'Handle CI for docs'
+inputs:
+  changed_files:
+    description: "The files changed by the PR"
+    required: true
+outputs:
+  should_skip:
+    description: "If it's ok to skip CI"
+runs:
+  using: 'node16'
+  main: 'docs.mjs'
